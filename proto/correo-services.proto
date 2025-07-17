@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package correo;
+
+// ==================== SERVICIOS ====================
+
+/**
+ * Servicio para gestión de destinos
+ */
+service DestinoService {
+    // ==================== DESTINOS ====================
+    rpc CreateDestino (CreateDestinoRequest) returns (CreateDestinoResponse);
+    rpc UpdateDestino (UpdateDestinoRequest) returns (UpdateDestinoResponse);
+    rpc DeleteDestino (DeleteDestinoRequest) returns (DeleteDestinoResponse);
+    rpc FindAllDestino (FindAllDestinoRequest) returns (FindAllDestinoResponse);
+    rpc FindOneDestino (FindOneDestinoRequest) returns (FindOneDestinoResponse);
+}
+
+// ==================== MENSAJES ====================
+ 
+message PaginationResponse {
+  int32 total = 1;
+  int32 page = 2;
+  int32 limit = 3;
+  int32 pages = 4;
+}
+
+// ==================== DESTINOS ===================
+ 
+message DestinoData {
+  int32 idDestino = 1;
+  string nombre = 2;
+  string direccion = 3;
+}
+
+message DestinoResponse {
+  int32 idDestino = 1;
+  string nombre = 2;
+  string direccion = 3;
+}
+
+message CreateDestinoRequest {
+    string nombre = 1;
+    string direccion = 2;
+}
+
+message CreateDestinoResponse {
+    bool success = 1;
+    string message = 2;
+    DestinoData data = 3;
+}
+
+message FindAllDestinoRequest {
+    int32 page = 1;
+    int32 limit = 2;
+    string search = 3;
+}
+
+message FindAllDestinoResponse {
+    bool success = 1;
+    string message = 2;
+    repeated DestinoData data = 3;
+    int32 total = 4;
+}
+
+message FindOneDestinoRequest {
+    int32 idDestino = 1;
+}
+
+message FindOneDestinoResponse {
+    bool success = 1;
+    string message = 2;
+    DestinoData data = 3;
+}
+
+message UpdateDestinoRequest {
+    int32 idDestino = 1;
+    optional string nombre = 2;
+    optional string direccion = 3;
+}
+
+message UpdateDestinoResponse {
+    bool success = 1;
+    string message = 2;
+    DestinoData data = 3;
+}
+
+message DeleteDestinoRequest {
+    int32 idDestino = 1;
+}
+
+message DeleteDestinoResponse {
+    bool success = 1;
+    string message = 2;
+}

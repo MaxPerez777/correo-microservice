@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Correo {
+  idCorreo    Int            @id @default(autoincrement())
+  asunto      String
+  contenido   String
+  tipo        String         // "entrada" | "salida"
+  fecha       DateTime       @default(now())
+  idPersona   Int?
+  idEmpresa   Int?
+  idDestino   Int?
+ 
+  persona     Persona?   @relation("CorreoPersona", fields: [idPersona], references: [idPersona])
+  empresa     Empresa?   @relation("CorreoEmpresa", fields: [idEmpresa], references: [idEmpresa])
+  destino     Destino?   @relation("CorreoDestino", fields: [idDestino], references: [idDestino])
+  pedidos     CorreoPedido[]
+}
+ 
+model Persona {
+  idPersona   Int        @id @default(autoincrement())
+  nombre      String
+  dni         String     @unique
+  telefono    String?
+  correo      String?
+ 
+  correos     Correo[]   @relation("CorreoPersona")
+}
+ 
+model Empresa {
+  idEmpresa   Int        @id @default(autoincrement())
+  nombre      String
+  ruc         String     @unique
+  direccion   String
+ 
+  correos     Correo[]   @relation("CorreoEmpresa")
+}
+ 
+model Destino {
+  idDestino   Int        @id @default(autoincrement())
+  nombre      String
+  direccion   String
+ 
+  correos     Correo[]   @relation("CorreoDestino")
+}
+ 
+model CorreoPedido {
+  idCorreoPedido Int     @id @default(autoincrement())
+  idCorreo       Int
+  codigo         String  // Código de seguimiento o registro
+  estado         String  // "pendiente", "entregado", "archivado", etc.
+  fecha          DateTime @default(now())
+ 
+  correo         Correo  @relation(fields: [idCorreo], references: [idCorreo])
+}
