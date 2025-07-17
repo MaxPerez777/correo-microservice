@@ -1,7 +1,6 @@
 import{
     Injectable,
     NotFoundException,
-    ConflictException,
     BadRequestException,
 } from '@nestjs/common';
 import { PrismaService } from '../../shared/services/prisma.service';
@@ -51,7 +50,7 @@ export class DestinoService extends BaseService<
                 where,
                 skip,
                 take: limit,
-                orderBy: { id_Destino: 'asc'},
+                orderBy: { idDestino: 'asc'},
             }),
         ]);
         return {

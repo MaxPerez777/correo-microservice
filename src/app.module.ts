@@ -7,8 +7,9 @@ import { AppService } from './app.service';
 // Filtros de excepciones
 import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
 import { CorreoModule } from './modules/correo/correo.module';
+import { DestinoModule } from './modules/destino/destino.module';
  
- 
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -16,6 +17,7 @@ import { CorreoModule } from './modules/correo/correo.module';
       envFilePath: '.env',
     }),
     CorreoModule,
+    DestinoModule,
   ],
   controllers: [AppController],
   providers: [
