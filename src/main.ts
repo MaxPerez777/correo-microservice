@@ -28,7 +28,7 @@ async function bootstrap() {
     .setTitle('Correo Service API')
     .setDescription('API para gestión de correos')
     .setVersion('1.0')
-    .addTag('correo')
+    .addTag('microservicio correo')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);

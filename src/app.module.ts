@@ -9,6 +9,8 @@ import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
 import { CorreoModule } from './modules/correo/correo.module';
 import { DestinoModule } from './modules/destino/destino.module';
 import { CorreoPedidoModule } from './modules/correo_pedido/correo-pedido.module';
+import { PersonaModule } from './modules/persona/persona.module';
+import { EmpresaModule } from './modules/empresa/empresa.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { CorreoPedidoModule } from './modules/correo_pedido/correo-pedido.module
     CorreoModule,
     DestinoModule,
     CorreoPedidoModule,
+    PersonaModule,
+    EmpresaModule,
     
   ],
   controllers: [AppController],

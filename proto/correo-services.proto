@@ -5,7 +5,43 @@ package correo;
 // ==================== SERVICIOS ====================
 
 /**
- * Servicio para gestión de destinos
+ * Servicio para gestion de correo
+ */
+service CorreoService {
+    // ==================== CORREOS ====================
+    rpc CreateCorreo (CreateCorreoRequest) returns (CreateCorreoResponse);
+    rpc UpdateCorreo (UpdateCorreoRequest) returns (UpdateCorreoResponse);
+    rpc DeleteCorreo (DeleteCorreoRequest) returns (DeleteCorreoResponse);
+    rpc FindAllCorreo (FindAllCorreoRequest) returns (FindAllCorreoResponse);
+    rpc FindOneCorreo (FindOneCorreoRequest) returns (FindOneCorreoResponse);
+}
+
+/**
+ * Servicio para gestion de persona
+ */
+service PersonaService {
+    // ==================== PERSONAS ====================
+    rpc CreatePersona (CreatePersonaRequest) returns (CreatePersonaResponse);
+    rpc UpdatePersona (UpdatePersonaRequest) returns (UpdatePersonaResponse);
+    rpc DeletePersona (DeletePersonaRequest) returns (DeletePersonaResponse);
+    rpc FindAllPersona (FindAllPersonaRequest) returns (FindAllPersonaResponse);
+    rpc FindOnePersona (FindOnePersonaRequest) returns (FindOnePersonaResponse);
+}
+
+/**
+ * Servicio para gestión de empresa
+ */
+service EmpresaService {
+    // ==================== EMPRESAS ====================
+    rpc CreateEmpresa (CreateEmpresaRequest) returns (CreateEmpresaResponse);
+    rpc UpdateEmpresa (UpdateEmpresaRequest) returns (UpdateEmpresaResponse);
+    rpc DeleteEmpresa (DeleteEmpresaRequest) returns (DeleteEmpresaResponse);
+    rpc FindAllEmpresa (FindAllEmpresaRequest) returns (FindAllEmpresaResponse);
+    rpc FindOneEmpresa (FindOneEmpresaRequest) returns (FindOneEmpresaResponse);
+}
+
+/**
+ * Servicio para gestión de destino
  */
 service DestinoService {
     // ==================== DESTINOS ====================
@@ -16,6 +52,18 @@ service DestinoService {
     rpc FindOneDestino (FindOneDestinoRequest) returns (FindOneDestinoResponse);
 }
 
+/**
+ * Servicio para gestión de correo pedido
+ */
+service CorreoPedidoService {
+    // ==================== CORREO PEDIDO ====================
+    rpc CreateCorreoPedido (CreateCorreoPedidoRequest) returns (CreateCorreoPedidoResponse);
+    rpc UpdateCorreoPedido (UpdateCorreoPedidoRequest) returns (UpdateCorreoPedidoResponse);
+    rpc DeleteCorreoPedido (DeleteCorreoPedidoRequest) returns (DeleteCorreoPedidoResponse);
+    rpc FindAllCorreoPedido (FindAllCorreoPedidoRequest) returns (FindAllCorreoPedidoResponse);
+    rpc FindOneCorreoPedido (FindOneCorreoPedidoRequest) returns (FindOneCorreoPedidoResponse);
+}
+
 // ==================== MENSAJES ====================
  
 message PaginationResponse {
@@ -23,6 +71,91 @@ message PaginationResponse {
   int32 page = 2;
   int32 limit = 3;
   int32 pages = 4;
+}
+
+// ==================== CORREOS ====================
+
+message CorreoData {
+    int32 idCorreo = 1;
+    string asunto = 2;
+    string contenido = 3;
+    string tipo = 4;
+    int32 idPersona = 5;
+    int32 idEmpresa = 6;
+    int32 idDestino = 7;
+}
+
+message CorreoResponse {
+    int32 idCorreo = 1;
+    string asunto = 2;
+    string contenido = 3;
+    string tipo = 4;
+    int32 idPersona = 5;
+    int32 idEmpresa = 6;
+    int32 idDestino = 7;
+}
+
+message CreateCorreoRequest {
+    string asunto = 1;
+    string contenido = 2;
+    string tipo = 3;
+    int32 idPersona = 4;
+    int32 idEmpresa = 5;
+    int32 idDestino = 6;
+}
+
+message CreateCorreoResponse {
+    bool success = 1;
+    string message = 2;
+    CorreoData data = 3;
+}
+
+message FindAllCorreoRequest {
+    int32 page = 1;
+    int32 limit = 2;
+    string search = 3;
+}
+
+message FindAllCorreoResponse {
+    bool success = 1;
+    string message = 2;
+    repeated CorreoData data = 3;
+    int32 total = 4;
+}
+
+message FindOneCorreoRequest {
+    int32 idCorreo = 1;
+}
+
+message FindOneCorreoResponse {
+    bool success = 1;
+    string message = 2;
+    CorreoData data = 3;
+}
+
+message UpdateCorreoRequest {
+    int32 idCorreo = 1;
+    optional string asunto = 2;
+    optional string contenido = 3;
+    optional string tipo = 4;
+    optional int32 idPersona = 5;
+    optional int32 idEmpresa = 6;
+    optional int32 idDestino = 7;
+}
+
+message UpdateCorreoResponse {
+    bool success = 1;
+    string message = 2;
+    CorreoData data = 3;
+}
+
+message DeleteCorreoRequest {
+    int32 idCorreo = 1;
+}
+
+message DeleteCorreoResponse {
+    bool success = 1;
+    string message = 2;
 }
 
 // ==================== DESTINOS ===================
@@ -93,3 +226,261 @@ message DeleteDestinoResponse {
     bool success = 1;
     string message = 2;
 }
+
+// ==================== CORREO PEDIDO ===================
+
+message CorreoPedidoData {
+    int32 idCorreoPedido = 1;
+    int32 idCorreo = 2;
+    string codigo = 3;
+    string estado = 4;
+    //DateTime fecha = 5;
+}
+
+message CorreoPedidoResponse {
+    int32 idCorreoPedido = 1;
+    int32 idCorreo = 2;
+    string codigo = 3;
+    string estado = 4;
+    //DateTime fecha = 5;
+}
+
+message CreateCorreoPedidoRequest {
+    int32 idCorreo = 1;
+    string codigo = 2;
+    string estado = 3;
+    //DateTime fecha = 4;
+}
+
+message CreateCorreoPedidoResponse {
+    bool success = 1;
+    string message = 2;
+    CorreoPedidoData data = 3;
+}
+
+message FindAllCorreoPedidoRequest {
+    int32 page = 1;
+    int32 limit = 2;
+    string search = 3;
+}
+
+message FindAllCorreoPedidoResponse {
+    bool success = 1;
+    string message = 2;
+    repeated CorreoPedidoData data = 3;
+    int32 total = 4;
+}
+
+message FindOneCorreoPedidoRequest {
+    int32 idCorreoPedido = 1;
+}
+
+message FindOneCorreoPedidoResponse {
+    bool success = 1;
+    string message = 2;
+    CorreoPedidoData data = 3;
+}
+
+message UpdateCorreoPedidoRequest {
+    int32 idCorreoPedido = 1;
+    optional int32 idCorreo = 2;
+    optional string codigo = 3;
+    optional string estado = 4;
+    //optional DateTime fecha = 5;
+}
+
+message UpdateCorreoPedidoResponse {
+    bool success = 1;
+    string message = 2;
+    CorreoPedidoData data = 3;
+}
+
+message DeleteCorreoPedidoRequest {
+    int32 idCorreoPedido = 1;
+}
+
+message DeleteCorreoPedidoResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+// ==================== PERSONAS ===================
+
+message PersonaData {
+    int32 idPersona = 1;
+    string nombre = 2;
+    string apellido = 3;
+    string telefono = 4;
+    string correo = 5;
+    string direccion = 6;
+}
+
+message PersonaResponse {
+    int32 idPersona = 1;
+    string nombre = 2;
+    string apellido = 3;
+    string telefono = 4;
+    string correo = 5;
+    string direccion = 6;
+}
+
+message PersonaRequest {
+    int32 idPersona = 1;
+    optional string nombre = 2;
+    optional string apellido = 3;
+    optional string telefono = 4;
+    optional string correo = 5;
+    optional string direccion = 6;
+}
+
+message CreatePersonaRequest {
+    string nombre = 1;
+    string apellido = 2;
+    string telefono = 3;
+    string correo = 4;
+    string direccion = 5;
+}
+
+message CreatePersonaResponse {
+    bool success = 1;
+    string message = 2;
+    PersonaData data = 3;
+}
+
+message FindAllPersonaRequest {
+    int32 page = 1;
+    int32 limit = 2;
+    string search = 3;
+}
+
+message FindAllPersonaResponse {
+    bool success = 1;
+    string message = 2;
+    repeated PersonaData data = 3;
+    int32 total = 4;
+}
+
+message FindOnePersonaRequest {
+    int32 idPersona = 1;
+}
+
+message FindOnePersonaResponse {
+    bool success = 1;
+    string message = 2;
+    PersonaData data = 3;
+}
+
+message UpdatePersonaRequest {
+    int32 idPersona = 1;
+    optional string nombre = 2;
+    optional string apellido = 3;
+    optional string telefono = 4;
+    optional string correo = 5;
+    optional string direccion = 6;
+}
+
+message UpdatePersonaResponse {
+    bool success = 1;
+    string message = 2;
+    PersonaData data = 3;
+}
+
+message DeletePersonaRequest {
+    int32 idPersona = 1;
+}
+
+message DeletePersonaResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+// ==================== EMPRESAS ===================
+
+message EmpresaData {
+    int32 idEmpresa = 1;
+    string nombre = 2;
+    string ruc = 3;
+    string direccion = 4;
+    string telefono = 5;
+    string correo = 6;
+}
+
+message EmpresaResponse {
+    int32 idEmpresa = 1;
+    string nombre = 2;
+    string ruc = 3;
+    string direccion = 4;
+    string telefono = 5;
+    string correo = 6;
+}
+
+message EmpresaRequest {
+    int32 idEmpresa = 1;
+    optional string nombre = 2;
+    optional string ruc = 3;
+    optional string direccion = 4;
+    optional string telefono = 5;
+    optional string correo = 6;
+}
+
+message CreateEmpresaRequest {
+    string nombre = 1;
+    string ruc = 2;
+    string direccion = 3;
+    string telefono = 4;
+    string correo = 5;
+}
+
+message CreateEmpresaResponse {
+    bool success = 1;
+    string message = 2;
+    EmpresaData data = 3;
+}
+
+message FindAllEmpresaRequest {
+    int32 page = 1;
+    int32 limit = 2;
+    string search = 3;
+}
+
+message FindAllEmpresaResponse {
+    bool success = 1;
+    string message = 2;
+    repeated EmpresaData data = 3;
+    int32 total = 4;
+}
+
+message FindOneEmpresaRequest {
+    int32 idEmpresa = 1;
+}
+
+message FindOneEmpresaResponse {
+    bool success = 1;
+    string message = 2;
+    EmpresaData data = 3;
+}
+
+message UpdateEmpresaRequest {
+    int32 idEmpresa = 1;
+    optional string nombre = 2;
+    optional string ruc = 3;
+    optional string direccion = 4;
+    optional string telefono = 5;
+    optional string correo = 6;
+}
+
+message UpdateEmpresaResponse {
+    bool success = 1;
+    string message = 2;
+    EmpresaData data = 3;
+}
+
+message DeleteEmpresaRequest {
+    int32 idEmpresa = 1;
+}
+
+message DeleteEmpresaResponse {
+    bool success = 1;
+    string message = 2;
+}
+
