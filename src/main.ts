@@ -12,20 +12,8 @@ async function bootstrap() {
  
   const app = await NestFactory.create(AppModule);
  
-  const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS
-    ? process.env.CORS_ALLOWED_ORIGINS.split(',')
-    : ['*'];
-
-  app.enableCors({
-    origin: allowedOrigins,
-    methods: process.env.CORS_ALLOWED_METHODS || 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: process.env.CORS_ALLOW_CREDENTIALS === 'true',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    allowedHeaders: process.env.CORS_ALLOWED_HEADERS || 'Content-Type, Accept, Authorization',
-    exposedHeaders: process.env.CORS_EXPOSED_HEADERS || '',
-  });
-
+  app.enableCors();
+ 
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -75,7 +63,6 @@ async function bootstrap() {
   logger.log(`🚀 Servidor HTTP iniciado en: ${await app.getUrl()}`);
   logger.log(`📚 Documentación Swagger disponible en: ${await app.getUrl()}/api/docs`);
   logger.log(`🔌 Servidor gRPC iniciado en: ${process.env.GRPC_URL || '0.0.0.0:5001'}`);
-  logger.log(`🔒 CORS configurado con orígenes permitidos: ${allowedOrigins.join(', ')}`);
 }
  
 bootstrap();
