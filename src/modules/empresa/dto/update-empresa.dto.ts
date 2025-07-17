@@ -1,13 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsNumber, IsOptional } from "class-validator";
+import { IsString, IsOptional } from "class-validator";
 
 
 export class UpdateEmpresaDto {
-    @ApiProperty({example: 1, description: 'ID unico de la empresa'})
-    @IsNumber()
-    @IsOptional()
-    id_empresa?: number;
-
     @ApiProperty({example: 'Empresa de Prueba', description: 'Nombre de la empresa'})
     @IsString()
     @IsOptional()

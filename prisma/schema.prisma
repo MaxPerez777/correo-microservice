@@ -8,23 +8,23 @@ datasource db {
 }
 
 model Correo {
-  idCorreo    Int            @id @default(autoincrement())
+  id_correo    Int            @id @default(autoincrement())
   asunto      String
   contenido   String
   tipo        String         // "entrada" | "salida"
   fecha       DateTime       @default(now())
-  idPersona   Int?
-  idEmpresa   Int?
-  idDestino   Int?
+  id_persona   Int?
+  id_empresa   Int?
+  id_destino   Int?
  
-  persona     Persona?   @relation("CorreoPersona", fields: [idPersona], references: [idPersona])
-  empresa     Empresa?   @relation("CorreoEmpresa", fields: [idEmpresa], references: [idEmpresa])
-  destino     Destino?   @relation("CorreoDestino", fields: [idDestino], references: [idDestino])
+  persona     Persona?   @relation("CorreoPersona", fields: [id_persona], references: [id_persona])
+  empresa     Empresa?   @relation("CorreoEmpresa", fields: [id_empresa], references: [id_empresa])
+  destino     Destino?   @relation("CorreoDestino", fields: [id_destino], references: [id_destino])
   pedidos     CorreoPedido[]
 }
  
 model Persona {
-  idPersona   Int        @id @default(autoincrement())
+  id_persona   Int        @id @default(autoincrement())
   nombre      String
   dni         String     @unique
   telefono    String?
@@ -34,7 +34,7 @@ model Persona {
 }
  
 model Empresa {
-  idEmpresa   Int        @id @default(autoincrement())
+  id_empresa   Int        @id @default(autoincrement())
   nombre      String
   ruc         String     @unique
   direccion   String
@@ -43,7 +43,7 @@ model Empresa {
 }
  
 model Destino {
-  idDestino   Int        @id @default(autoincrement())
+  id_destino   Int        @id @default(autoincrement())
   nombre      String
   direccion   String
  
@@ -51,11 +51,11 @@ model Destino {
 }
  
 model CorreoPedido {
-  idCorreoPedido Int     @id @default(autoincrement())
-  idCorreo       Int
+  id_correo_pedido Int     @id @default(autoincrement())
+  id_correo       Int
   codigo         String  // Código de seguimiento o registro
   estado         String  // "pendiente", "entregado", "archivado", etc.
   fecha          DateTime @default(now())
  
-  correo         Correo  @relation(fields: [idCorreo], references: [idCorreo])
+  correo         Correo  @relation(fields: [id_correo], references: [id_correo])
 }

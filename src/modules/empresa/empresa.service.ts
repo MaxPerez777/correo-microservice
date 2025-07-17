@@ -50,7 +50,7 @@ export class EmpresaService extends BaseService<
                 where,
                 skip,
                 take: limit,
-                orderBy: { id_Empresa: 'asc'},
+                orderBy: { id_empresa: 'asc'},
             }),
         ]);
         return {
@@ -65,7 +65,7 @@ export class EmpresaService extends BaseService<
 
         const entity = await this.prismaModel.findUnique({
             where: {
-                id_Empresa: Number(id),
+                id_empresa: Number(id),
             },
         });
 
@@ -83,7 +83,7 @@ export class EmpresaService extends BaseService<
         const data = cleanDto(dto);
         try {
             const updated = await this.prismaModel.update({
-                where: { id_Empresa: id },
+                where: { id_empresa: id },
                 data,
             });
             return this.mapToDto(updated);
@@ -96,7 +96,7 @@ export class EmpresaService extends BaseService<
         await this.findOne(id);
         try {
             await this.prismaModel.delete({
-                where: { id_Empresa: id },
+                where: { id_empresa: id },
             });
         } catch (error) {
             throw new NotFoundException('Empresa no encontrada');
@@ -108,7 +108,7 @@ export class EmpresaService extends BaseService<
     }
     mapToDto(entity: any): EmpresaResponseDto {
         return {
-            idEmpresa: entity.id_Empresa,
+            idEmpresa: entity.id_empresa,
             nombre: entity.nombre,
             ruc: entity.ruc,
             direccion: entity.direccion,

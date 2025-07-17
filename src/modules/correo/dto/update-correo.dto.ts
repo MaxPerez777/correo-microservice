@@ -3,11 +3,6 @@ import { IsNumber, IsString, IsOptional} from "class-validator";
 
 
 export class UpdateCorreoDto {
-    @ApiPropertyOptional({ example: 1, description: 'ID único del correo' })
-    @IsOptional()
-    @IsNumber()
-    id_correo?: number;
-
     @ApiPropertyOptional({ example: 'Solicitud de informacion', description: 'Asunto del correo' })
     @IsOptional()
     @IsString()

@@ -1,5 +1,5 @@
 export class PersonaEntity {
-    idPersona: number;
+    id_persona: number;
     nombre: string;
     dni: string;
     telefono: string;

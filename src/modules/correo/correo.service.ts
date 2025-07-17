@@ -51,7 +51,7 @@ export class CorreoService extends BaseService<
                 where,
                 skip,
                 take: limit,
-                orderBy: { id_Correo: 'asc'},
+                orderBy: { id_correo: 'asc'},
             }),
         ]);
         return {

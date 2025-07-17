@@ -3,10 +3,6 @@ import { IsString, IsNumber } from "class-validator";
 
 export class CreateDestinoDto {
     @ApiProperty({ example: 'Nombre del Destino' })
-    @IsNumber()
-    idDestino: number;
-
-    @ApiProperty({ example: 'Nombre del Destino' })
     @IsString()
     nombre: string;
 

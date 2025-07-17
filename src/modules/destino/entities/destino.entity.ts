@@ -1,5 +1,5 @@
 export class DestinoEntity{
-    idDestino: number;
+    id_destino: number;
     nombre: string;
     direccion: string;
 }

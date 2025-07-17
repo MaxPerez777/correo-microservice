@@ -50,7 +50,7 @@ export class DestinoService extends BaseService<
                 where,
                 skip,
                 take: limit,
-                orderBy: { idDestino: 'asc'},
+                orderBy: { id_destino: 'asc'},
             }),
         ]);
         return {
@@ -66,7 +66,7 @@ export class DestinoService extends BaseService<
 
         const entity = await this.prismaModel.findUnique({
             where: {
-                idDestino: Number(id),
+                id_destino: Number(id),
             },
         });
 
@@ -84,7 +84,7 @@ export class DestinoService extends BaseService<
         const data = cleanDto(dto);
         try {
             const updated = await this.prismaModel.update({
-                where: { idDestino: id },
+                where: { id_destino: id },
                 data,
             });
             return this.mapToDto(updated);
@@ -97,7 +97,7 @@ export class DestinoService extends BaseService<
         await this.findOne(id);
         try {
             await this.prismaModel.delete({
-                where: { idDestino: id },
+                where: { id_destino: id },
             });
         } catch (error) {
             throw new NotFoundException('Destino no encontrado');
@@ -109,7 +109,7 @@ export class DestinoService extends BaseService<
     }
     mapToDto(entity: any): DestinoResponseDto {
         return {
-            idDestino: entity.idDestino,
+            idDestino: entity.id_destino,
             nombre: entity.nombre,
             direccion: entity.direccion,
         };

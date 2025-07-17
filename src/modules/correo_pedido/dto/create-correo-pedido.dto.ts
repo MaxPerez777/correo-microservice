@@ -2,10 +2,6 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, IsString } from "class-validator";
 
 export class CreateCorreoPedidoDto {
-    @ApiProperty({example: 1, description: 'ID unico del correo pedido'})
-    @IsNumber()
-    id_correo_pedido: number;
-
     @ApiProperty({example: 1, description: 'ID unico del correo'})
     @IsNumber()
     id_correo: number;

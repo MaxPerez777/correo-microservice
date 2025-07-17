@@ -51,7 +51,7 @@ export class PersonaService extends BaseService<
                 where,
                 skip,
                 take: limit,
-                orderBy: { idPersona: 'asc'},
+                orderBy: { id_persona: 'asc'},
             }),
         ]);
         return {
@@ -67,7 +67,7 @@ export class PersonaService extends BaseService<
 
         const entity = await this.prismaModel.findUnique({
             where: {
-                id_Persona: Number(id),
+                id_persona: Number(id),
             },
         });
 
@@ -85,7 +85,7 @@ export class PersonaService extends BaseService<
         const data = cleanDto(dto);
         try {
             const updated = await this.prismaModel.update({
-                where: { id_Persona: id },
+                where: { id_persona: id },
                 data,
             });
             return this.mapToDto(updated);
@@ -98,7 +98,7 @@ export class PersonaService extends BaseService<
         await this.findOne(id);
         try {
             await this.prismaModel.delete({
-                where: { idPersona: id },
+                where: { id_persona: id },
             });
         } catch (error) {
             throw new NotFoundException('Persona no encontrada');
@@ -110,7 +110,7 @@ export class PersonaService extends BaseService<
     }
     mapToDto(entity: any): PersonaResponseDto {
         return {
-            idPersona: entity.idPersona,
+            idPersona: entity.id_persona,
             nombre: entity.nombre,
             dni: entity.dni,
             telefono: entity.telefono,

@@ -18,10 +18,9 @@ export class CorreoPedidoController {
             ejemplo: {
                 summary: 'Ejemplo de payload',
                 value: {
-                    idCorreo: 1,
+                    id_correo: 1,
                     codigo: 'COD-001',
                     estado: 'pendiente',
-                    fecha: '2023-01-01',
                 },
             },
         },
@@ -58,10 +57,9 @@ export class CorreoPedidoController {
             ejemplo: {
                 summary: 'Ejemplo de payload',
                 value: {
-                    idCorreo: 1,
+                    id_correo: 1,
                     codigo: 'COD-001',
                     estado: 'pendiente',
-                    fecha: '2023-01-01',
                 },
             },
         },
